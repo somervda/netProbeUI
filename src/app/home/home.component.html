@@ -1,4 +1,38 @@
-<p>home works!</p>
-<valuecell [value]="12345"></valuecell><br/>
-<valuecell [value]="67" UOM="ms"></valuecell><br/>
-<valuecell [value]="123456789" UOM="bps"></valuecell>
+<table width="400px">
+  <tr>
+    <th>Host</th>
+    <th>Ping</th>
+    <th>Bing</th>
+    <th>Web</th>
+  </tr>
+  <tr *ngFor="let host of hostStatus">
+    <td>{{ host["address"] }}</td>
+    <td align="right">
+      <valuecell
+        [value]="host['pingRTL']"
+        UOM="ms"
+        [success]="host['pingSuccess']"
+        [active]="host['pingActive']"
+        [fixedDigits]="0"
+      ></valuecell>
+    </td>
+    <td align="right">
+      <valuecell
+        [value]="host['bingBPS']"
+        UOM="bps"
+        [success]="host['bingSuccess']"
+        [active]="host['bingActive']"
+        [fixedDigits]="1"
+      ></valuecell>
+    </td>
+    <td align="right">
+      <valuecell
+        [value]="host['webMS']"
+        UOM="ms"
+        [success]="host['webSuccess']"
+        [active]="host['webActive']"
+        [fixedDigits]="0"
+      ></valuecell>
+    </td>
+  </tr>
+</table>

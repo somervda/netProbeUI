@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  netProbeHost: 'netProbe.home',
 };

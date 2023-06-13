@@ -1,0 +1,10 @@
+.successful {
+    background-color: lightgray;
+    color: black;
+    padding: 3px;
+}
+.failure {
+    background-color: rgba(255, 0, 0, 0.622);
+    color: white;
+    padding: 3px;
+}
