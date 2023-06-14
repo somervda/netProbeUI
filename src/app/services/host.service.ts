@@ -14,4 +14,11 @@ export class HostService {
     );
     return value;
   }
+
+  getHost(id: number) {
+    let value = this.http.get<string>(
+      'http://' + environment.netProbeHost + '/host/' + id.toString()
+    );
+    return value;
+  }
 }

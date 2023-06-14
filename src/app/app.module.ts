@@ -10,9 +10,16 @@ import { HomeComponent } from './home/home.component';
 import { ValuecellComponent } from './shared/valuecell/valuecell.component';
 import { MatButtonModule } from '@angular/material/button';
 import { HistoryComponent } from './history/history.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ValuecellComponent, HistoryComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ValuecellComponent,
+    HistoryComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,6 +27,9 @@ import { HistoryComponent } from './history/history.component';
     HttpClientModule,
     GoogleChartsModule,
     MatButtonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

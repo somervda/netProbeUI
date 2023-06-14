@@ -1,11 +1,25 @@
-<google-chart
-*ngIf="showChart"
-#chart
-[type]="chartType"
-[data]="chartData"
-[columns]="chartColumns"
-[options]="chartOptions"
-[dynamicResize]="chartResize"
-class="googleChart"
->
-</google-chart>
+<ng-template [ngIf]="showChart">
+  <h1>{{ title }}</h1>
+  <google-chart
+    #chart
+    [type]="chartType"
+    [data]="chartData"
+    [columns]="chartColumns"
+    [options]="chartOptions"
+    [dynamicResize]="chartResize"
+    class="googleChart"
+  >
+  </google-chart>
+
+  <div style="text-align: center; margin-top: 10px">
+    <mat-radio-group
+      (change)="historyChange($event)"
+      aria-labelledby="rglHistory"
+    >
+      <mat-radio-button value="6" checked>6 Hours&nbsp;&nbsp;</mat-radio-button>
+      <mat-radio-button value="48">2 Days&nbsp;&nbsp;</mat-radio-button>
+      <mat-radio-button value="168">7 Days&nbsp;&nbsp;</mat-radio-button>
+      <mat-radio-button value="336">14 Days&nbsp;&nbsp;</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</ng-template>
