@@ -1,3 +1,11 @@
-<p>history works!</p>
-{{ id }}
-{{ type }}
+<google-chart
+*ngIf="showChart"
+#chart
+[type]="chartType"
+[data]="chartData"
+[columns]="chartColumns"
+[options]="chartOptions"
+[dynamicResize]="chartResize"
+class="googleChart"
+>
+</google-chart>
