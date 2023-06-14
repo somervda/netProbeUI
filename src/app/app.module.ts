@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HistoryComponent } from './history/history.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
+import { HostComponent } from './host/host.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MatRadioModule } from '@angular/material/radio';
     HomeComponent,
     ValuecellComponent,
     HistoryComponent,
+    HostComponent,
   ],
   imports: [
     BrowserModule,
