@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ChartType } from 'angular-google-charts';
 import { MatRadioChange } from '@angular/material/radio';
 import { HostService } from '../services/host.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-history',
@@ -14,7 +15,7 @@ import { HostService } from '../services/host.service';
 export class HistoryComponent implements OnInit {
   id = 0;
   type = '';
-  chartHours = 6;
+  chartHours = 2;
 
   // Google Charts
   showChart = false;
@@ -71,6 +72,8 @@ export class HistoryComponent implements OnInit {
       // console.log(response);
       let pointSize = 0;
       this.chartData = [];
+      let now = new Date(Date.now());
+      console.log(now);
       this.history = Object.values(JSON.parse(JSON.stringify(response)));
       // Check to see if we are dealing with summarized data
       if (this.history[0]['p50']) {
@@ -93,7 +96,8 @@ export class HistoryComponent implements OnInit {
           chartArea: { width: '80%', height: '70%' },
           formatters: {},
           vAxis: { viewWindow: { min: 0 }, title: this.vAxisTitle },
-          pointSize: 0,
+          hAxis: { viewWindow: { max: now } },
+          pointSize: 2,
         };
       } else {
         // Not summarized
@@ -110,6 +114,7 @@ export class HistoryComponent implements OnInit {
           chartArea: { width: '80%', height: '70%' },
           formatters: {},
           vAxis: { viewWindow: { min: 0 }, title: this.vAxisTitle },
+          hAxis: { viewWindow: { max: now } },
           pointSize: 7,
         };
       }
