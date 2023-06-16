@@ -121,8 +121,9 @@ export class HistoryComponent implements OnInit {
     });
     // Get host address and show in title
     this.host.getHost(this.id).subscribe((response) => {
-      let host = JSON.parse(JSON.stringify(response));
-      this.hostAddress = host['address'];
+      let host = response;
+      console.log(host);
+      this.hostAddress = host.address;
       this.title = this.hostAddress + ' (' + type + ')';
       this.showChart = true;
     });
