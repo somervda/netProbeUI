@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 export interface HostModel {
@@ -30,17 +30,33 @@ export class HostService {
   constructor(private http: HttpClient) {}
 
   getHostStatus() {
-    let value = this.http.get<string>(
+    let hostStatus$ = this.http.get<string>(
       'http://' + environment.netProbeHost + '/hostStatus'
     );
-    return value;
+    return hostStatus$;
   }
 
   getHost(id: number) {
-    let host = this.http.get<HostModel>(
+    let host$ = this.http.get<HostModel>(
       'http://' + environment.netProbeHost + '/host/' + id.toString()
     );
 
-    return host;
+    return host$;
+  }
+
+  addHost(host: HostModel) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache',
+    });
+    let options = {
+      headers: httpHeaders,
+    };
+    let host$ = this.http.post(
+      'http://' + environment.netProbeHost + '/host/add',
+      host,
+      options
+    );
+    return host$;
   }
 }

@@ -70,7 +70,10 @@ export class HostComponent implements OnInit {
     // console.log('update', this.cacheForm);
     // if (this.hostForm.invalid == false) {
     console.log('pingActive', this.hostForm.controls['pingIntervalMinutes']);
-    // }
+    if (this.host)
+      this.hostService.addHost(this.host).subscribe((host) => {
+        console.log('addHost$:', host);
+      });
   }
 
   intervalComparisonFunction = function (

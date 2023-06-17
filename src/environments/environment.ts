@@ -2,6 +2,6 @@
 // and the epoch time on the esp32 (2000 based)
 export const environment = {
   production: false,
-  netProbeHost: 'netProbe.home',
-  EPOCH_OFFSET: 946684800
+  netProbeHost: '192.168.1.46',
+  EPOCH_OFFSET: 946684800,
 };
