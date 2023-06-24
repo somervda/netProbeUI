@@ -1,5 +1,8 @@
 <mat-card style="border: grey; margin: 5px; max-width: 800px">
-  <mat-card-title><img src="favicon.ico" /> NetProbe</mat-card-title>
+  <mat-card-title (click)="iconClick()"
+    ><img src="favicon.ico" matTooltip="Click to refresh" />
+    NetProbe</mat-card-title
+  >
   <mat-card-content>
     <table style="width: 90%; margin-left: 20px">
       <tr>
@@ -11,9 +14,11 @@
       </tr>
       <tr *ngFor="let host of hostStatus">
         <td style="font-weight: 500; width: 100%">
-          <a routerLink="/host/update/{{ host['id'] }}" title="Update">{{
-            host["address"]
-          }}</a>
+          <a
+            routerLink="/host/update/{{ host['id'] }}"
+            matTooltip="Update Host"
+            >{{ host["address"] }}</a
+          >
         </td>
         <td align="right">
           <valuecell
@@ -52,7 +57,12 @@
       </tr>
     </table>
 
-    <button mat-raised-button routerLink="/host/add" style="margin-top: 10px">
+    <button
+      mat-raised-button
+      routerLink="/host/add"
+      style="margin-top: 10px"
+      matTooltip="Add new Host"
+    >
       Add
     </button>
   </mat-card-content></mat-card

@@ -1,6 +1,9 @@
 <mat-card style="border: grey; margin: 5px">
   <mat-card-title (click)="iconClick()"
-    ><img src="favicon.ico" />&nbsp;Host</mat-card-title
+    ><img
+      src="favicon.ico"
+      matTooltip="Return to home"
+    />&nbsp;Host</mat-card-title
   >
   <mat-card-content>
     <div [formGroup]="hostForm">

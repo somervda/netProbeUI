@@ -1,5 +1,5 @@
 <div width="100%" *ngIf="active" [class]="successClass">
-  <a routerLink="/history/{{ id }}/{{ type }}" title="Chart">
+  <a routerLink="/history/{{ id }}/{{ type }}" matTooltip="View History">
     {{ strValue }}&nbsp;{{ scaleValue }}{{ UOM }}</a
   >
 </div>

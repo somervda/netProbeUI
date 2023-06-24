@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { HostService } from '../services/host.service';
 @Component({
@@ -10,8 +11,17 @@ export class HomeComponent implements OnInit {
   constructor(private hostService: HostService) {}
 
   ngOnInit(): void {
+    this.getHostStatus();
+  }
+
+  getHostStatus(): void {
     this.hostService.getHostStatus().subscribe((response) => {
       this.hostStatus = response;
     });
+  }
+
+  iconClick() {
+    this.hostStatus = [];
+    this.getHostStatus();
   }
 }

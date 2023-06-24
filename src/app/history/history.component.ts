@@ -5,7 +5,6 @@ import { environment } from 'src/environments/environment';
 import { ChartType } from 'angular-google-charts';
 import { MatRadioChange } from '@angular/material/radio';
 import { HostService } from '../services/host.service';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-history',

@@ -1,6 +1,9 @@
 <mat-card style="border: grey; margin: 5px; max-width: 800px">
   <mat-card-title (click)="iconClick()"
-    ><img src="favicon.ico" />&nbsp;History</mat-card-title
+    ><img
+      src="favicon.ico"
+      matTooltip="Return to home"
+    />&nbsp;History</mat-card-title
   >
   <mat-card-content>
     <ng-template [ngIf]="showChart">
