@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoggerService } from '../services/logger.service';
 import { environment } from 'src/environments/environment';
 import { ChartType } from 'angular-google-charts';
@@ -35,10 +35,12 @@ export class HistoryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private logger: LoggerService,
-    private host: HostService
+    private host: HostService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    console.log('History ngOnInit');
     let _id = this.route.snapshot.paramMap.get('id');
     this.id = _id !== null ? parseInt(_id) : 0;
     let _type = this.route.snapshot.paramMap.get('type');
@@ -75,48 +77,50 @@ export class HistoryComponent implements OnInit {
       let now = new Date(Date.now());
       console.log(now);
       this.history = Object.values(JSON.parse(JSON.stringify(response)));
-      // Check to see if we are dealing with summarized data
-      if (this.history[0]['p50']) {
-        // Summarized
-        this.history.forEach((element) => {
-          this.chartData.push([
-            new Date((element['ts'] + environment.EPOCH_OFFSET) * 1000),
-            element['p10'],
-            element['p50'],
-            element['p90'],
-          ]);
-        });
-        this.chartColumns = ['Time', 'P10', 'P50', 'P90'];
-        this.chartType = ChartType.AreaChart;
-        Object.defineProperty(this.chartOptions, 'pointSize', {
-          value: 0,
-        });
-        this.chartOptions = {
-          legend: { position: 'bottom' },
-          chartArea: { width: '80%', height: '70%' },
-          formatters: {},
-          vAxis: { viewWindow: { min: 0 }, title: this.vAxisTitle },
-          hAxis: { viewWindow: { max: now } },
-          pointSize: 2,
-        };
-      } else {
-        // Not summarized
-        this.history.forEach((element) => {
-          this.chartData.push([
-            new Date((element['ts'] + environment.EPOCH_OFFSET) * 1000),
-            element['v'],
-          ]);
-        });
-        this.chartColumns = ['Time', 'Value'];
-        this.chartType = ChartType.LineChart;
-        this.chartOptions = {
-          legend: { position: 'bottom' },
-          chartArea: { width: '80%', height: '70%' },
-          formatters: {},
-          vAxis: { viewWindow: { min: 0 }, title: this.vAxisTitle },
-          hAxis: { viewWindow: { max: now } },
-          pointSize: 7,
-        };
+      if (this.history.length > 0) {
+        // Check to see if we are dealing with summarized data
+        if (this.history[0]['p50']) {
+          // Summarized
+          this.history.forEach((element) => {
+            this.chartData.push([
+              new Date((element['ts'] + environment.EPOCH_OFFSET) * 1000),
+              element['p10'],
+              element['p50'],
+              element['p90'],
+            ]);
+          });
+          this.chartColumns = ['Time', 'P10', 'P50', 'P90'];
+          this.chartType = ChartType.AreaChart;
+          Object.defineProperty(this.chartOptions, 'pointSize', {
+            value: 0,
+          });
+          this.chartOptions = {
+            legend: { position: 'bottom' },
+            chartArea: { width: '80%', height: '70%' },
+            formatters: {},
+            vAxis: { viewWindow: { min: 0 }, title: this.vAxisTitle },
+            hAxis: { viewWindow: { max: now } },
+            pointSize: 2,
+          };
+        } else {
+          // Not summarized
+          this.history.forEach((element) => {
+            this.chartData.push([
+              new Date((element['ts'] + environment.EPOCH_OFFSET) * 1000),
+              element['v'],
+            ]);
+          });
+          this.chartColumns = ['Time', 'Value'];
+          this.chartType = ChartType.LineChart;
+          this.chartOptions = {
+            legend: { position: 'bottom' },
+            chartArea: { width: '80%', height: '70%' },
+            formatters: {},
+            vAxis: { viewWindow: { min: 0 }, title: this.vAxisTitle },
+            hAxis: { viewWindow: { max: now } },
+            pointSize: 7,
+          };
+        }
       }
     });
     // Get host address and show in title
@@ -129,5 +133,9 @@ export class HistoryComponent implements OnInit {
     });
 
     // console.log(this.chartData);
+  }
+
+  iconClick() {
+    this.router.navigate(['/']);
   }
 }

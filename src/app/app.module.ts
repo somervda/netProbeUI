@@ -17,6 +17,9 @@ import { HostComponent } from './host/host.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -41,8 +44,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTooltipModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

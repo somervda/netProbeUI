@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'history/:id/:type', component: HistoryComponent },
   { path: 'host/:action/:id', component: HostComponent },
+  { path: 'host/:action', component: HostComponent },
 ];
 
 @NgModule({

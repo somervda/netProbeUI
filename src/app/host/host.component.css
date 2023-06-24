@@ -1,0 +1,16 @@
+@media (min-width: 400px) {
+    .gridwrapper2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 10px;
+      background-color: white;
+      padding: 5px;
+      border-style: outset;
+      border-width: 1px;
+
+    }
+  }
+
+  .sectionTitle {font-weight: 500;
+      margin-top: 5px;
+      margin-bottom: 5px}

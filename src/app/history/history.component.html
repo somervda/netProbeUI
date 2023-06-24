@@ -1,26 +1,35 @@
-<ng-template [ngIf]="showChart">
-  <h1>{{ title }}</h1>
-  <google-chart
-    #chart
-    [type]="chartType"
-    [data]="chartData"
-    [columns]="chartColumns"
-    [options]="chartOptions"
-    [dynamicResize]="chartResize"
-    class="googleChart"
+<mat-card style="border: grey; margin: 5px; max-width: 800px">
+  <mat-card-title (click)="iconClick()"
+    ><img src="favicon.ico" />&nbsp;History</mat-card-title
   >
-  </google-chart>
+  <mat-card-content>
+    <ng-template [ngIf]="showChart">
+      <h4>{{ title }}</h4>
+      <google-chart
+        #chart
+        [type]="chartType"
+        [data]="chartData"
+        [columns]="chartColumns"
+        [options]="chartOptions"
+        [dynamicResize]="chartResize"
+        class="googleChart"
+      >
+      </google-chart>
 
-  <div style="text-align: center; margin-top: 10px">
-    <mat-radio-group
-      (change)="historyChange($event)"
-      aria-labelledby="rglHistory"
-    >
-      <mat-radio-button value="2" checked>2 Hours&nbsp;&nbsp;</mat-radio-button>
-      <mat-radio-button value="8">8 Hours&nbsp;&nbsp;</mat-radio-button>
-      <mat-radio-button value="14">14 Hours&nbsp;&nbsp;</mat-radio-button>
-      <mat-radio-button value="168">7 Days&nbsp;&nbsp;</mat-radio-button>
-      <mat-radio-button value="336">14 Days&nbsp;&nbsp;</mat-radio-button>
-    </mat-radio-group>
-  </div>
-</ng-template>
+      <div style="text-align: center; margin-top: 10px">
+        <mat-radio-group
+          (change)="historyChange($event)"
+          aria-labelledby="rglHistory"
+        >
+          <mat-radio-button value="2" checked
+            >2 Hours&nbsp;&nbsp;</mat-radio-button
+          >
+          <mat-radio-button value="8">8 Hours&nbsp;&nbsp;</mat-radio-button>
+          <mat-radio-button value="14">14 Hours&nbsp;&nbsp;</mat-radio-button>
+          <mat-radio-button value="168">7 Days&nbsp;&nbsp;</mat-radio-button>
+          <mat-radio-button value="336">14 Days&nbsp;&nbsp;</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </ng-template>
+  </mat-card-content></mat-card
+>

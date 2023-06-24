@@ -1,55 +1,59 @@
-<table width="400px">
-  <tr>
-    <th align="left">Host</th>
-    <th align="right">Ping</th>
-    <th align="right">Bing</th>
-    <th align="right">Web</th>
-    <th></th>
-  </tr>
-  <tr *ngFor="let host of hostStatus">
-    <td>
-      <a href="/host/update/{{ host['id'] }}" title="Update">{{
-        host["address"]
-      }}</a>
-    </td>
-    <td align="right">
-      <valuecell
-        [value]="host['pingRTL']"
-        UOM="ms"
-        type="ping"
-        [success]="host['pingSuccess']"
-        [active]="host['pingActive']"
-        [fixedDigits]="0"
-        [id]="host['id']"
-      ></valuecell>
-    </td>
-    <td align="right">
-      <valuecell
-        [value]="host['bingBPS']"
-        UOM="bps"
-        type="bing"
-        [success]="host['bingSuccess']"
-        [active]="host['bingActive']"
-        [fixedDigits]="1"
-        [scale]="true"
-        [id]="host['id']"
-      ></valuecell>
-    </td>
-    <td align="right">
-      <valuecell
-        [value]="host['webMS']"
-        UOM="ms"
-        type="web"
-        [success]="host['webSuccess']"
-        [active]="host['webActive']"
-        [fixedDigits]="0"
-        [id]="host['id']"
-      ></valuecell>
-    </td>
-    <td>
-      &nbsp;<a href="/host/delete/{{ host['id'] }}" title="Delete Host">[x]</a>
-    </td>
-  </tr>
-</table>
+<mat-card style="border: grey; margin: 5px; max-width: 800px">
+  <mat-card-title><img src="favicon.ico" /> NetProbe</mat-card-title>
+  <mat-card-content>
+    <table style="width: 90%; margin-left: 20px">
+      <tr>
+        <th style="text-align: left">Host</th>
+        <th>Ping</th>
+        <th>Bing</th>
+        <th>Web</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let host of hostStatus">
+        <td style="font-weight: 500; width: 100%">
+          <a routerLink="/host/update/{{ host['id'] }}" title="Update">{{
+            host["address"]
+          }}</a>
+        </td>
+        <td align="right">
+          <valuecell
+            [value]="host['pingRTL']"
+            UOM="ms"
+            type="ping"
+            [success]="host['pingSuccess']"
+            [active]="host['pingActive']"
+            [fixedDigits]="0"
+            [id]="host['id']"
+          ></valuecell>
+        </td>
+        <td align="right">
+          <valuecell
+            [value]="host['bingBPS']"
+            UOM="bps"
+            type="bing"
+            [success]="host['bingSuccess']"
+            [active]="host['bingActive']"
+            [fixedDigits]="1"
+            [scale]="true"
+            [id]="host['id']"
+          ></valuecell>
+        </td>
+        <td align="right">
+          <valuecell
+            [value]="host['webMS']"
+            UOM="ms"
+            type="web"
+            [success]="host['webSuccess']"
+            [active]="host['webActive']"
+            [fixedDigits]="0"
+            [id]="host['id']"
+          ></valuecell>
+        </td>
+      </tr>
+    </table>
 
-<button mat-raised-button href="/host/add">Add</button>
+    <button mat-raised-button routerLink="/host/add" style="margin-top: 10px">
+      Add
+    </button>
+  </mat-card-content></mat-card
+>

@@ -52,10 +52,33 @@ export class HostService {
     let options = {
       headers: httpHeaders,
     };
-    let host$ = this.http.post(
+    let hostId$ = this.http.post(
       'http://' + environment.netProbeHost + '/host/add',
       host,
       options
+    );
+    return hostId$;
+  }
+
+  updateHost(host: HostModel) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache',
+    });
+    let options = {
+      headers: httpHeaders,
+    };
+    let hostId$ = this.http.post(
+      'http://' + environment.netProbeHost + '/host/update',
+      host,
+      options
+    );
+    return hostId$;
+  }
+
+  deleteHost(id: number) {
+    let host$ = this.http.delete(
+      'http://' + environment.netProbeHost + '/host/' + id.toString()
     );
     return host$;
   }
