@@ -92,15 +92,21 @@ export class HostComponent implements OnInit {
       description: this.hostForm.controls['description'].value,
       ping: {
         active: this.hostForm.controls['pingActive'].value,
-        intervalMinutes: this.hostForm.controls['pingIntervalMinutes'].value,
+        intervalMinutes: parseInt(
+          this.hostForm.controls['pingIntervalMinutes'].value
+        ),
       },
       bing: {
         active: this.hostForm.controls['bingActive'].value,
-        intervalMinutes: this.hostForm.controls['bingIntervalMinutes'].value,
+        intervalMinutes: parseInt(
+          this.hostForm.controls['bingIntervalMinutes'].value
+        ),
       },
       web: {
         active: this.hostForm.controls['webActive'].value,
-        intervalMinutes: this.hostForm.controls['webIntervalMinutes'].value,
+        intervalMinutes: parseInt(
+          this.hostForm.controls['webIntervalMinutes'].value
+        ),
         url: this.hostForm.controls['webURL'].value,
         match: this.hostForm.controls['webMatch'].value,
         https: this.hostForm.controls['webHttps'].value,
