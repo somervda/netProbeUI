@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { ConfigService } from './config.service';
 
 export interface HostModel {
   id: number;
@@ -27,18 +27,21 @@ export interface HostModel {
   providedIn: 'root',
 })
 export class HostService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private configService: ConfigService) {}
 
   getHostStatus() {
     let hostStatus$ = this.http.get<string>(
-      'http://' + environment.netProbeHost + '/hostStatus'
+      'http://' + this.configService.getConfig().netProbeHost + '/hostStatus'
     );
     return hostStatus$;
   }
 
   getHost(id: number) {
     let host$ = this.http.get<HostModel>(
-      'http://' + environment.netProbeHost + '/host/' + id.toString()
+      'http://' +
+        this.configService.getConfig().netProbeHost +
+        '/host/' +
+        id.toString()
     );
 
     return host$;
@@ -53,7 +56,7 @@ export class HostService {
       headers: httpHeaders,
     };
     let hostId$ = this.http.post(
-      'http://' + environment.netProbeHost + '/host/add',
+      'http://' + this.configService.getConfig().netProbeHost + '/host/add',
       host,
       options
     );
@@ -69,7 +72,7 @@ export class HostService {
       headers: httpHeaders,
     };
     let hostId$ = this.http.post(
-      'http://' + environment.netProbeHost + '/host/update',
+      'http://' + this.configService.getConfig().netProbeHost + '/host/update',
       host,
       options
     );
@@ -78,7 +81,10 @@ export class HostService {
 
   deleteHost(id: number) {
     let host$ = this.http.delete(
-      'http://' + environment.netProbeHost + '/host/' + id.toString()
+      'http://' +
+        this.configService.getConfig().netProbeHost +
+        '/host/' +
+        id.toString()
     );
     return host$;
   }
