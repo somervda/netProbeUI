@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 
 export interface AppConfig {
   netProbeHost: string;
+  EPOCH_OFFSET: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigService {
-  private config: AppConfig = { netProbeHost: '' };
+  private config: AppConfig = { netProbeHost: '' , EPOCH_OFFSET: 946684800};
   loaded = false;
   constructor(private http: HttpClient) {}
   loadConfig(): Promise<void> {

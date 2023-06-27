@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ChartType } from 'angular-google-charts';
 import { MatRadioChange } from '@angular/material/radio';
 import { HostService } from '../services/host.service';
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'app-history',
@@ -35,7 +36,8 @@ export class HistoryComponent implements OnInit {
     private route: ActivatedRoute,
     private logger: LoggerService,
     private host: HostService,
-    private router: Router
+    private router: Router,
+    private configService: ConfigService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +57,7 @@ export class HistoryComponent implements OnInit {
 
   doCharting(ageHours: number, id: number, type: string): void {
     // this.showChart = false;
-    let startTime = Math.round(Date.now() / 1000) - environment.EPOCH_OFFSET;
+    let startTime = Math.round(Date.now() / 1000) - this.configService.getConfig().EPOCH_OFFSET;
     startTime -= ageHours * 60 * 60;
     switch (type) {
       case 'ping':
@@ -82,7 +84,7 @@ export class HistoryComponent implements OnInit {
           // Summarized
           this.history.forEach((element) => {
             this.chartData.push([
-              new Date((element['ts'] + environment.EPOCH_OFFSET) * 1000),
+              new Date((element['ts'] + this.configService.getConfig().EPOCH_OFFSET) * 1000),
               element['p10'],
               element['p50'],
               element['p90'],
@@ -105,7 +107,7 @@ export class HistoryComponent implements OnInit {
           // Not summarized
           this.history.forEach((element) => {
             this.chartData.push([
-              new Date((element['ts'] + environment.EPOCH_OFFSET) * 1000),
+              new Date((element['ts'] + this.configService.getConfig().EPOCH_OFFSET) * 1000),
               element['v'],
             ]);
           });

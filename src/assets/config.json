@@ -1,3 +1,5 @@
+
 {
-    "netProbeHost": "netprobe.home"
+    "netProbeHost": "192.168.1.47:5000",
+    "EPOCH_OFFSET": 0
 }
