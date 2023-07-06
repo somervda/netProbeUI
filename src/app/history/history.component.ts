@@ -15,7 +15,7 @@ import { ConfigService } from '../services/config.service';
 export class HistoryComponent implements OnInit {
   id = 0;
   type = '';
-  chartHours = 2;
+  chartHours = 4;
 
   // Google Charts
   showChart = false;
@@ -24,7 +24,7 @@ export class HistoryComponent implements OnInit {
   chartColumns: string[] = [];
   vAxisTitle = '';
   // See https://developers.google.com/chart/interactive/docs/gallery/combochart
-  chartOptions = {};
+  chartOptions : any;
   chartData: any[] = [];
   history = [];
 
@@ -112,7 +112,7 @@ export class HistoryComponent implements OnInit {
             ]);
           });
           this.chartColumns = ['Time', 'Value'];
-          this.chartType = ChartType.LineChart;
+          this.chartType = ChartType.ScatterChart;
           this.chartOptions = {
             legend: { position: 'bottom' },
             chartArea: { width: '80%', height: '70%' },
@@ -121,6 +121,10 @@ export class HistoryComponent implements OnInit {
             hAxis: { viewWindow: { max: now } },
             pointSize: 7,
           };
+        }
+        if (type == 'bing') {
+          this.chartOptions.vAxis.viewWindow.max = "100000000";
+
         }
       }
     });
