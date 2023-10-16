@@ -16,6 +16,7 @@ export class HistoryComponent implements OnInit {
   id = 0;
   type = '';
   chartHours = 4;
+  chartMax = 0
 
   // Google Charts
   showChart = false;
@@ -52,6 +53,11 @@ export class HistoryComponent implements OnInit {
 
   historyChange($event: MatRadioChange) {
     this.chartHours = parseInt($event.value);
+    this.doCharting(this.chartHours, this.id, this.type);
+  }
+
+  rangeChange($event: MatRadioChange) {
+    this.chartMax = parseInt($event.value);
     this.doCharting(this.chartHours, this.id, this.type);
   }
 
@@ -122,9 +128,11 @@ export class HistoryComponent implements OnInit {
             pointSize: 7,
           };
         }
-        if (type == 'bing') {
+        if (this.chartMax == 100) {
           this.chartOptions.vAxis.viewWindow.max = "100000000";
-
+        }
+        if (this.chartMax == 10) {
+          this.chartOptions.vAxis.viewWindow.max = "10000000";
         }
       }
     });
