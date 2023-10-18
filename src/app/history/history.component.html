@@ -1,13 +1,25 @@
 <mat-card style="border: grey; margin: 5px; max-width: 800px">
-  <mat-card-title (click)="iconClick()"
-    ><img
-      src="favicon.ico"
-      matTooltip="Return to home"
-    />&nbsp;History</mat-card-title
-  >
+  <mat-card-title
+    (click)="iconClick()"
+    style="background: Gainsboro; padding: 5px; border-radius: 5px"
+    ><img src="favicon.ico" matTooltip="Return to home page" />&nbsp;<span
+      style="color: darkblue"
+      >History</span
+    >
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Return to home page"
+      (click)="iconClick()"
+      fontIcon="home"
+      style="margin-left: 10px; float: right; vertical-align: bottom"
+      matTooltip="Return to home page"
+    ></mat-icon>
+  </mat-card-title>
   <mat-card-content>
     <ng-template [ngIf]="showChart">
-      <h4>{{ title }}</h4>
+      <b
+        >{{ description }} <i>({{ title }})</i></b
+      >
       <google-chart
         #chart
         [type]="chartType"
@@ -18,35 +30,51 @@
         class="googleChart"
       >
       </google-chart>
-
-      <ng-template [ngIf]="type=='bing'">
-      <div style="text-align: center; margin-top: 10px" >
-        <mat-radio-group
-          (change)="rangeChange($event)"
-          aria-labelledby="rglHistoryRange"
-        >
-          <mat-radio-button value="0" checked
-            >Auto&nbsp;&nbsp;</mat-radio-button
-          >
-          <mat-radio-button value="10">10Mbps&nbsp;&nbsp;</mat-radio-button>
-          <mat-radio-button value="100">100Mbps&nbsp;&nbsp;</mat-radio-button>
-        </mat-radio-group>
+      <div>
+        <ng-template [ngIf]="type == 'bing'">
+          <div style="text-align: center; margin-top: 10px">
+            <mat-radio-group
+              (change)="rangeChange($event)"
+              aria-labelledby="rglHistoryRange"
+              name="rbgRange"
+            >
+              <mat-radio-button value="0" checked name="range0"
+                >Auto&nbsp;&nbsp;</mat-radio-button
+              >
+              <mat-radio-button value="10" name="range10"
+                >10Mbps&nbsp;&nbsp;</mat-radio-button
+              >
+              <mat-radio-button value="100" name="range110"
+                >100Mbps&nbsp;&nbsp;</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
+        </ng-template>
       </div>
-      </ng-template>
-
       <div style="text-align: center; margin-top: 10px">
         <mat-radio-group
           (change)="historyChange($event)"
           aria-labelledby="rglHistory"
+          name="rbgHistory"
         >
-          <mat-radio-button value="4" checked
+          <mat-radio-button value="4" checked name="history4"
             >4 Hours&nbsp;&nbsp;</mat-radio-button
           >
-          <mat-radio-button value="24">24 Hours&nbsp;&nbsp;</mat-radio-button>
-          <mat-radio-button value="72">3 Days&nbsp;&nbsp;</mat-radio-button>
-          <mat-radio-button value="168">7 Days&nbsp;&nbsp;</mat-radio-button>
-          <mat-radio-button value="720">30 Days&nbsp;&nbsp;</mat-radio-button>
-          <mat-radio-button value="2160">90 Days&nbsp;&nbsp;</mat-radio-button>
+          <mat-radio-button value="24" name="history24"
+            >24 Hours&nbsp;&nbsp;</mat-radio-button
+          >
+          <mat-radio-button value="72" name="history72"
+            >3 Days&nbsp;&nbsp;</mat-radio-button
+          >
+          <mat-radio-button value="168" name="history168"
+            >7 Days&nbsp;&nbsp;</mat-radio-button
+          >
+          <mat-radio-button value="720" name="history720"
+            >30 Days&nbsp;&nbsp;</mat-radio-button
+          >
+          <mat-radio-button value="2160" name="history2160"
+            >90 Days&nbsp;&nbsp;</mat-radio-button
+          >
         </mat-radio-group>
       </div>
     </ng-template>

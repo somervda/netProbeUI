@@ -16,7 +16,7 @@ export class HistoryComponent implements OnInit {
   id = 0;
   type = '';
   chartHours = 4;
-  chartMax = 0
+  chartMax = 0;
 
   // Google Charts
   showChart = false;
@@ -25,12 +25,13 @@ export class HistoryComponent implements OnInit {
   chartColumns: string[] = [];
   vAxisTitle = '';
   // See https://developers.google.com/chart/interactive/docs/gallery/combochart
-  chartOptions : any;
+  chartOptions: any;
   chartData: any[] = [];
   history = [];
 
   chartSelection = '1';
   title = '';
+  description = '';
   hostAddress = '';
 
   constructor(
@@ -63,7 +64,9 @@ export class HistoryComponent implements OnInit {
 
   doCharting(ageHours: number, id: number, type: string): void {
     // this.showChart = false;
-    let startTime = Math.round(Date.now() / 1000) - this.configService.getConfig().EPOCH_OFFSET;
+    let startTime =
+      Math.round(Date.now() / 1000) -
+      this.configService.getConfig().EPOCH_OFFSET;
     startTime -= ageHours * 60 * 60;
     switch (type) {
       case 'ping':
@@ -90,7 +93,10 @@ export class HistoryComponent implements OnInit {
           // Summarized
           this.history.forEach((element) => {
             this.chartData.push([
-              new Date((element['ts'] + this.configService.getConfig().EPOCH_OFFSET) * 1000),
+              new Date(
+                (element['ts'] + this.configService.getConfig().EPOCH_OFFSET) *
+                  1000
+              ),
               element['p10'],
               element['p50'],
               element['p90'],
@@ -105,7 +111,11 @@ export class HistoryComponent implements OnInit {
             legend: { position: 'bottom' },
             chartArea: { width: '80%', height: '70%' },
             formatters: {},
-            vAxis: { viewWindow: { min: 0 }, title: this.vAxisTitle },
+            vAxis: {
+              viewWindow: { min: 0 },
+              title: this.vAxisTitle,
+              format: 'short',
+            },
             hAxis: { viewWindow: { max: now } },
             pointSize: 2,
           };
@@ -113,26 +123,37 @@ export class HistoryComponent implements OnInit {
           // Not summarized
           this.history.forEach((element) => {
             this.chartData.push([
-              new Date((element['ts'] + this.configService.getConfig().EPOCH_OFFSET) * 1000),
+              new Date(
+                (element['ts'] + this.configService.getConfig().EPOCH_OFFSET) *
+                  1000
+              ),
               element['v'],
             ]);
           });
-          this.chartColumns = ['Time', 'Value'];
+          if (this.type == 'bing') {
+            this.chartColumns = ['Time', 'bps'];
+          } else {
+            this.chartColumns = ['Time', 'ms'];
+          }
           this.chartType = ChartType.ScatterChart;
           this.chartOptions = {
             legend: { position: 'bottom' },
             chartArea: { width: '80%', height: '70%' },
             formatters: {},
-            vAxis: { viewWindow: { min: 0 }, title: this.vAxisTitle },
+            vAxis: {
+              viewWindow: { min: 0 },
+              title: this.vAxisTitle,
+              format: 'short',
+            },
             hAxis: { viewWindow: { max: now } },
             pointSize: 7,
           };
         }
         if (this.chartMax == 100) {
-          this.chartOptions.vAxis.viewWindow.max = "100000000";
+          this.chartOptions.vAxis.viewWindow.max = '100000000';
         }
         if (this.chartMax == 10) {
-          this.chartOptions.vAxis.viewWindow.max = "10000000";
+          this.chartOptions.vAxis.viewWindow.max = '10000000';
         }
       }
     });
@@ -140,8 +161,8 @@ export class HistoryComponent implements OnInit {
     this.host.getHost(this.id).subscribe((response) => {
       let host = response;
       console.log(host);
-      this.hostAddress = host.address;
-      this.title = this.hostAddress + ' (' + type + ')';
+      this.title = host.address;
+      this.description = host.description;
       this.showChart = true;
     });
 

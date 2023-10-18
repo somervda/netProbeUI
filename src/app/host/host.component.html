@@ -1,10 +1,20 @@
 <mat-card style="border: grey; margin: 5px">
-  <mat-card-title (click)="iconClick()"
-    ><img
-      src="favicon.ico"
-      matTooltip="Return to home"
-    />&nbsp;Host</mat-card-title
-  >
+  <mat-card-title
+    (click)="iconClick()"
+    style="background: Gainsboro; padding: 5px; border-radius: 5px"
+    ><img src="favicon.ico" matTooltip="Return to home page" />&nbsp;<span
+      style="color: darkblue"
+      >Host</span
+    >
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Return to home page"
+      (click)="iconClick()"
+      fontIcon="home"
+      style="margin-left: 10px; float: right"
+      matTooltip="Return to home page"
+    ></mat-icon>
+  </mat-card-title>
   <mat-card-content>
     <div [formGroup]="hostForm">
       <!-- Times to turn on pump -->

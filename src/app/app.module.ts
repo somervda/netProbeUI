@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ConfigService } from './services/config.service';
@@ -47,6 +48,7 @@ export function initConfig(appConfig: ConfigService) {
     MatSelectModule,
     MatInputModule,
     MatCheckboxModule,
+    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     MatTooltipModule,
